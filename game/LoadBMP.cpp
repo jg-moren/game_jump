@@ -63,20 +63,20 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 
-/* FunÁ„o que atribui as vari·veis de ambiente da
+/* Fun√ß√£o que atribui as vari√°veis de ambiente da
 
 textura com a sua cena */
 glTexEnvf ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,
 GL_MODULATE );
 
-/* Faz a geraÁao da textura na memÛria */
+/* Faz a gera√ßao da textura na mem√≥ria */
 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width,
 Height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 
 
 
 fclose (fp_arquivo);
-//free (image);
+free (image);
 return 1;
 
 		
