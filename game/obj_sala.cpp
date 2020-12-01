@@ -1,5 +1,5 @@
 #include"obj_sala.h"
-#include"salas.h"
+#include"var_salas.h"
 
 
 		
@@ -13,7 +13,7 @@
 
 		obj_blocos blocos;
 		LoadBMP load;
-		salas sala;
+		var_salas sala;
 
 
 		
@@ -42,11 +42,33 @@
 		}
 		}
 		
+		
+		for(int i1=0;i1<sala.rows();i1+=1){
+		for(int i2=0;i2<sala.high();i2+=1){
+		for(int i3=0;i3<sala.cols();i3+=1){
+
+		glPushMatrix();
+		glRotatef(0,1,0,0);
+		glTranslatef(0,-1,0);
+		if(sala.mapa(i1,i2,i3)==2){
+		glPushMatrix();
+		glDisable(GL_LIGHTING);
+		glColor3f(0,1,0);
+		glTranslatef(i3+0.5,i2+1.5,i1+0.5);
+		glutSolidSphere(0.25,20,20);
+		glEnable(GL_LIGHTING);
+		glPopMatrix();
+		}
+		glPopMatrix();		
+		}
+		}
+		}
+		
 		glPopMatrix();
 	}
 		
 	float obj_sala::colisao0(float coo [3] ){ 
-			salas sala;
+			var_salas sala;
 			if(coo[1]<-10){
 				return 1;
 			}
@@ -71,7 +93,7 @@
 			//return coo[0]; 
 		} 
 	float obj_sala::colisao1(float coo [3]){ 
-			salas sala;
+			var_salas sala;
 			if(coo[1]<-100){
 				return 3;
 			}
@@ -91,7 +113,7 @@
 			
 		} 
 	float obj_sala::colisao2(float coo [3]){ 
-			salas sala;
+			var_salas sala;
 			if(coo[1]<-10){
 				return 1;
 			}
@@ -115,7 +137,7 @@
 			return coo[2]; 
 		} 
 	float obj_sala::pulo (float coo [3],float impulso){
-			salas sala;
+			var_salas sala;
 			if(-1<=coo[1] && coo[1] < sala.high()   ){
 				
 			if(sala.mapa((int)coo[2], (int)(coo[1]-0.1), (int)coo[0])  ==1/* && coo[1]<(int)coo[1]+0.1*/){
@@ -130,9 +152,16 @@
 			}
 			
 		}
-		
+	
+	void obj_sala::proxSala(float coo [3]){
+		var_salas sala;
+		if(sala.mapa((int)coo[2],(int)coo[1],(int)coo[0])==2){
+			sala.nextMap();
+		}
+	}
+	
 	bool obj_sala::contpulo(float coo[3],bool pulos){
-			salas sala;
+			var_salas sala;
 			if(sala.mapa((int)coo[2], (int)(coo[1]-0.1), (int)coo[0])  ==1){
 				return true;
 			}else{

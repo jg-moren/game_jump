@@ -1,0 +1,49 @@
+# Project: Projeto1
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o obj_personagem.o obj_sala.o obj_luz.o obj_blocos.o LoadBMP.o var_salas.o numero.o
+LINKOBJ  = main.o obj_personagem.o obj_sala.o obj_luz.o obj_blocos.o LoadBMP.o var_salas.o numero.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -mwindows -lopengl32 -lfreeglut -lglu32
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = game.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+obj_personagem.o: obj_personagem.cpp
+	$(CPP) -c obj_personagem.cpp -o obj_personagem.o $(CXXFLAGS)
+
+obj_sala.o: obj_sala.cpp
+	$(CPP) -c obj_sala.cpp -o obj_sala.o $(CXXFLAGS)
+
+obj_luz.o: obj_luz.cpp
+	$(CPP) -c obj_luz.cpp -o obj_luz.o $(CXXFLAGS)
+
+obj_blocos.o: obj_blocos.cpp
+	$(CPP) -c obj_blocos.cpp -o obj_blocos.o $(CXXFLAGS)
+
+LoadBMP.o: LoadBMP.cpp
+	$(CPP) -c LoadBMP.cpp -o LoadBMP.o $(CXXFLAGS)
+
+var_salas.o: var_salas.cpp
+	$(CPP) -c var_salas.cpp -o var_salas.o $(CXXFLAGS)
+
+numero.o: numero.cpp
+	$(CPP) -c numero.cpp -o numero.o $(CXXFLAGS)

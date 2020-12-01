@@ -11,6 +11,7 @@
 #include "obj_sala.h"
 #include "obj_luz.h"
 #include "numero.h"
+#include "var_salas.h"
 
 bool keyStates [256] ; 
 
@@ -129,7 +130,6 @@ if(angulo > 180){
 
 if (keyStates[32]) { 
 if(pulos)impulso=0.5,pulos=false;
-
 }
 }
 
@@ -162,17 +162,24 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT,lmodelo_ambiente);
 gluLookAt(coo_personagem[0]+(sin(camera*PI/180))*5,coo_personagem[1]/2+5,coo_personagem[2]+(cos(camera*PI/180))*5,coo_personagem[0],coo_personagem[1],coo_personagem[2],0,1,0);
 //gluLookAt(0,10,20,0,0,0,0,1,0);
 
+
+	
 	obj_luz luz;
 	luz.luz1();
 	
+	
+	
+
+	
 	obj_personagem personagem;
 	personagem.personagem(coo_personagem,angulo+camera,time_move);
-	
+
 	obj_sala sala;
 	sala.sala();
 	coo_personagem[1] = sala.colisao1(coo_personagem);
 	coo_personagem[0] = sala.colisao0(coo_personagem);
 	coo_personagem[2] = sala.colisao2(coo_personagem);
+	sala.proxSala(coo_personagem);
 
 
 	//rodar+=1;
@@ -190,9 +197,10 @@ gluLookAt(coo_personagem[0]+(sin(camera*PI/180))*5,coo_personagem[1]/2+5,coo_per
 glPopMatrix();
 //--------------------------------------------------------------------------------------------------------------------
 glPushMatrix();
+	var_salas salas;
 	glTranslatef(4,4,0);
 	Numero num;
-	num.numero(12);
+	num.numero(salas.getSala());
 glPopMatrix();
 //--------------------------------------------------------------------------------------------------------------------
 

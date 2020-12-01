@@ -18,6 +18,7 @@ class obj_sala{
     	float colisao0(float coo [3]); 
     	float colisao1(float coo [3]); 
     	float colisao2(float coo [3]); 
+    	void proxSala(float coo [3]); 
 		float pulo (float coo [3],float impulso);
 		bool contpulo(float coo[3],bool pulos);
 };
